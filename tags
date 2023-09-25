@@ -1,0 +1,28 @@
+Mandaaaa	andaaaa.c	/^int main()$/
+Mbuen_molde	buen_molde.c	/^int main()$/
+Mmain	main.c	/^int main()$/
+Mseg	seg.c	/^int main()$/
+base	buen_molde.c	12
+base	main.c	12
+base	seg.c	11
+car	buen_molde.c	/^int car(int x, int y)$/
+car	main.c	/^int car(int x, int y)$/
+car	seg.c	/^int car(int x, int y)$/
+h	buen_molde.c	14
+h	main.c	14
+h	seg.c	13
+is_inside	buen_molde.c	/^int is_inside(int x, int y)$/
+is_inside	main.c	/^int is_inside(int x, int y)$/
+pix	buen_molde.c	/^void pix(int x, int y, int color)$/
+pix	main.c	/^void pix(int x, int y, int color)$/
+pix	seg.c	/^void pix(int x, int y, int color)$/
+qsize	main.c	18
+w	buen_molde.c	13
+w	main.c	13
+w	seg.c	12
+x_c	buen_molde.c	16
+x_c	main.c	16
+x_c	seg.c	15
+y_c	buen_molde.c	17
+y_c	main.c	17
+y_c	seg.c	16
