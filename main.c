@@ -9,6 +9,7 @@
 #include <linux/fb.h>
 #include <time.h>
 #include <math.h>
+#include "fakes.h"
 
 char *base;
 int w;
@@ -32,7 +33,7 @@ void pix(int x, int y, int color)
 
 int is_inside(int x, int y)
 {
-    return (x * x + y * y <= (150 + foffset) * (150 + foffset));
+    return (1);
 }
 
 int main()
@@ -82,38 +83,50 @@ int main()
     struct timespec printDelay;
     printDelay.tv_nsec = 50000;
 
-    for (int i = 0; i < 50; ++i)
-    {
-        for (double t = -3.141592; t < 10; t = (t >= 3.141592 ? t - 2 * 3.141592 + 0.25 : t + 0.25))
-        {
-            dir = ((foffset == 0 || foffset == 200) ? !dir : dir);
-            foffset = (int)(dir ? foffset + 1 : foffset - 1);
-            for (int y = 1-h / 2; y < h / 2; ++y)
-            {
-                for (int x = 1-w / 2; x < w / 2; ++x)
-                {
-                    if (is_inside(x, y))
-                    {
-                        pix(x + offx, y + offy, 0x00ff0000 + (int)400 * sin(y));
-                        // nanosleep(&delay, NULL);
-                    }
-                    else
-                    {
-                        if (1)
-                        {
-                            pix(x + offx, y + offy, 0x0);
-                        }
-                        else
-                        {
-                            pix(x + offx, y + offy, 0x0);
-                        }
-                    }
-                }
-            }
-            // nanosleep(&delay, NULL);
-        }
+//    for (int i = 0; i < 50; ++i)
+//    {
+//        for (double t = -3.141592; t < 1; t = (t >= 3.141592 ? t - 2 * 3.141592 + 0.25 : t + 0.25))
+//        {
+//            dir = ((foffset == 0 || foffset == 200) ? !dir : dir);
+//            foffset = (int)(dir ? foffset + 1 : foffset - 1);
+//            for (int y = 1-h / 2; y < h / 2; ++y)
+//            {
+//                for (int x = 1-w / 2; x < w / 2; ++x)
+//                {
+//                    if (is_inside(x, y))
+//                    {
+//                        //pix(x + offx, y + offy, 0x00ff0000 + (int)400 * sin(y));
+//                        // nanosleep(&delay, NULL);
+//                    }
+//                    else
+//                    {
+//                        if (1)
+//                        {
+//                            pix(x + offx, y + offy, 0x0);
+//                        }
+//                        else
+//                        {
+//                            pix(x + offx, y + offy, 0x0);
+//                        }
+//                    }
+//                }
+//            }
+//            
+//
+//            // nanosleep(&delay, NULL);
+//        }
+//       
+//
+//        nanosleep(&printDelay, NULL);
+//    }
 
-        nanosleep(&printDelay, NULL);
+    int x = 30;
+    int y = 30;
+    for (double t = 0.01; t<300; t += 0.025)
+    {
+        pix((t*fcos(2*t))+offx,(t*fsin(2*t))+offy, 0x00ff00ff);
+        nanosleep(&delay,NULL);
+//        printf("x: %lf,y: %lf, t: %lf\n", 50*fcos(t)+offx, 50*fsin(t)+offy, t);
     }
 
     close(fb);
