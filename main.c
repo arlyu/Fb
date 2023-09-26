@@ -31,9 +31,14 @@ void pix(int x, int y, int color)
     *real = color;
 }
 
+int is_safe(double x, double y)
+{
+    return (x < w && x >= 0 && y < h && y >= 0);
+}
+
 int is_inside(int x, int y)
 {
-    return (1);
+    return (is_safe(x,y));
 }
 
 int main()
@@ -61,7 +66,7 @@ int main()
     int ssize = vin.yres_virtual * vin.xres_virtual * vin.bits_per_pixel / 8;
     char *ptr = (char *)mmap(0, ssize, PROT_READ | PROT_WRITE, MAP_SHARED, fb, 0);
 
-    if ((int)ptr == -1)
+    if (ptr == (char *) -1)
     {
         printf("Fuck3\n");
         close(fb);
@@ -77,11 +82,11 @@ int main()
     int offx = x_c;
     int offy = y_c;
     struct timespec delay;
-    delay.tv_nsec = 10000;
+    delay.tv_nsec = 500;
     int dir = 0;
 
     struct timespec printDelay;
-    printDelay.tv_nsec = 50000;
+    printDelay.tv_nsec = 500;
 
 //    for (int i = 0; i < 50; ++i)
 //    {
@@ -122,13 +127,21 @@ int main()
 
     int x = 30;
     int y = 30;
-    for (double t = 0.01; t<300; t += 0.025)
+    for (double u = 0.01; u < 300; u += 0.10)
     {
-        pix((t*fcos(2*t))+offx,(t*fsin(2*t))+offy, 0x00ff00ff);
-        nanosleep(&delay,NULL);
-//        printf("x: %lf,y: %lf, t: %lf\n", 50*fcos(t)+offx, 50*fsin(t)+offy, t);
-    }
+        for (double t = 0.01; t<900; t += 0.025)
+        {
+            x = (4*t*cos(2*t+8*u))+offx;
+            y = (4*t*sin(2*t+8*u))+offy;
 
+            if(is_inside(x,y))
+            {
+                pix(x,y, 0x00f0f0f0 + 256*sin(u*400)+10*10*u);
+                nanosleep(&delay,NULL);
+            }
+            //        printf("x: %lf,y: %lf, t: %lf\n", 50*fcos(t)+offx, 50*fsin(t)+offy, t);
+        }
+    }
     close(fb);
     munmap(base, ssize);
 

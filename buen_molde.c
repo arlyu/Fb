@@ -85,7 +85,7 @@ int main()
             if(is_inside(x,y))
             {
                 pix(x+offx,y+offy,0x00ff0000);
-                nanosleep(&delay, NULL);
+                //nanosleep(&delay, NULL);
             }
             else
             {
