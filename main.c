@@ -33,10 +33,10 @@ void pix(int x, int y, int color)
 
 void clear()
 {
-    int *real = NULL;
-    real = (int *) base;
+    long int *real = NULL;
+    real = (long int *) base;
     
-    while ( real < (int *) (base + 4*h*w))
+    while ( real < (long int *) (base + 4*h*w))
     {
         *real = 0;
         ++real;
@@ -149,8 +149,8 @@ int main()
         clear();
         for (double t = 0.01; t<90; t += 0.025)
         {
-            x = (t*cos(t));
-            y = (t*sin(t));
+            x = 64*cos(t);
+            y = 128*sin(t);
             //xaux = x;
             //x = x*cos(u)-y*sin(u);
             y = xaux*sin(u)+y*cos(u);
@@ -158,13 +158,13 @@ int main()
             x += offx;
             y += offy;
 
-            if(is_inside(x,y))
+            if(is_safe(x,y))
             {
                 pix(x,y, 0x00f0f0f0 + 256*sin(u*400)+10*10*u);
             }
             //        printf("x: %lf,y: %lf, t: %lf\n", 50*fcos(t)+offx, 50*fsin(t)+offy, t);
         }
-        //nanosleep(&delay,NULL);
+        nanosleep(&delay,NULL);
     }
     close(fb);
     munmap(base, ssize);
