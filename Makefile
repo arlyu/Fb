@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O1 -lm
+CFLAGS = -O1 -lm -lncurses
 
 .PHONY: clean
 .PHONY: r

@@ -98,7 +98,7 @@ int main()
     int offx = x_c;
     int offy = y_c;
     struct timespec delay;
-    delay.tv_nsec = 5000000;
+    delay.tv_nsec = 8000000;
     int dir = 0;
 
     struct timespec printDelay;
@@ -151,11 +151,11 @@ int main()
         clear();
         for (double t = 0.01; t<90; t += 0.025)
         {
-            x = 64*fcos(t);
-            y = 128*fsin(t);
-            z = 120;
+            x = 64*cos(t)*sqrt(t);
+            y = 128*sin(t);
+            z = t;
             xaux = x;
-            x = x*fcos(u)-z*fsin(u);
+            x = x*cos(u)-z*sin(u);
             //y = xaux*sin(u)+y*cos(u);
         
             x += offx;
@@ -163,7 +163,7 @@ int main()
 
             if(is_safe(x,y))
             {
-                pix(x,y, 0x00f0f0f0 + 256*sin(u*400)+10*10*u);
+                pix(x,y, 0x00f0f0f0 + 256*fsin(u*400)+10*10*u);
             }
             //        printf("x: %lf,y: %lf, t: %lf\n", 50*fcos(t)+offx, 50*fsin(t)+offy, t);
         }
