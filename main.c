@@ -144,16 +144,19 @@ int main()
     int x = 30;
     int xaux = 0;
     int y = 30;
+    double z = 0;
+
     for (double u = 0.01; u < 300; u += 0.0123)
     {
         clear();
         for (double t = 0.01; t<90; t += 0.025)
         {
-            x = 64*cos(t);
-            y = 128*sin(t);
-            //xaux = x;
-            //x = x*cos(u)-y*sin(u);
-            y = xaux*sin(u)+y*cos(u);
+            x = 64*fcos(t);
+            y = 128*fsin(t);
+            z = 120;
+            xaux = x;
+            x = x*fcos(u)-z*fsin(u);
+            //y = xaux*sin(u)+y*cos(u);
         
             x += offx;
             y += offy;

@@ -19,11 +19,12 @@ double fcos(double x)
 {
     double res = 0u;
 
+    x = 2*x*SQRT2/PI;   // Fixing period
     double h1 = mod(x * INVSQRT2, 2) - mod(x * INVSQRT2, 1);
     double h0 = 1 - h1;
     double h2 = 1 - 2 * (mod(x * INVSQRT2/2, 2) - mod(x * INVSQRT2/2, 1));
 
-    res = h2 * (aprcos(mod(2*x*SQRT2/PI,SQRT2))*h0-aprcos(mod(-2*x*SQRT2/PI,SQRT2))*h1);
+    res = h2 * (aprcos(mod(x,SQRT2))*h0-aprcos(mod(-x,SQRT2))*h1);
 
     return res;
 }
